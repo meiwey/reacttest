@@ -99,12 +99,49 @@ class UserRegistration extends React.Component {
 		
 	}
 	
+	onSubmitReg(event)
+	{
+		event.preventDefault();
 
+   	 	// create a string for an HTTP body message
+    	const name = encodeURIComponent(this.state.user.name);
+    	const email = encodeURIComponent(this.state.user.email);
+    	const username = encodeURIComponent(this.state.user.username);
+    	const password = encodeURIComponent(this.state.user.password);
+    	const formData = `name=${name}&email=${email}&username=${username}&password=${password}`;
+
+    	// create an AJAX request
+    	const xhr = new XMLHttpRequest();
+    	xhr.open('post', '/auth/signup');
+    	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    	xhr.responseType = 'json';
+    	xhr.addEventListener('load', () => {
+      
+      	if (xhr.status === 200) {
+        	//success
+        	this.setState({ errors: {}});
+
+        	console.log('The form is valid');
+      	} 
+      	else {
+        // failure
+
+        const errors = xhr.response.errors ? xhr.response.errors : {};
+        	errors.summary = xhr.response.message;
+
+        		this.setState({
+          			errors
+        		});
+      		}
+    	});
+    	xhr.send(formData);
+	}
+	
 	
 	render () {
 		return (
 			<div>
-			<form>
+			<form onSubmit={this.onSubmitReg}>
 				<h1> Hello ! </h1>
 				<fieldset className='form-group'>
 				<label> Name : </label>
