@@ -25,22 +25,28 @@ class UserRegistration extends React.Component {
 	
 	render () {
 		return (
+			
 			<form>
-				<label> Name : 
+				<h1> Hello ! </h1>
+				<fieldset className='form-group'>
+				<label> Name : </label>
 				<input name="name" type="text" value={this.state.name} onChange={this.handleInputChange}/>
-				</label>
+				</fieldset>
 				
-				<label> Email : 
+				<fieldset className='form-group'>
+				<label> Email : </label>
 				<input name="email" type="email" value={this.state.email} onChange={this.handleInputChange}/>
-				</label>
+				</fieldset>
 				
-				<label> Username : 
+				<fieldset className='form-group'>
+				<label> Username : </label>
 				<input name="username" type="text" value={this.state.username} onChange={this.handleInputChange}/>
-				</label>
+				</fieldset>
 				
-				<label> Password : 
+				<fieldset className='form-group'>
+				<label> Password : </label>
 				<input name="password" type="password" value={this.state.password} onChange={this.handleInputChange}/>
-				</label>
+				</fieldset>
 			</form>
 		)
 	}

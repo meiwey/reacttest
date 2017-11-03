@@ -5,10 +5,8 @@ import UserRegistration from './UserRegistration.jsx';
 class App extends React.Component {
   render () {
     return (
-    	<div>
-    		<p> Hello React!</p>
-    		<UserRegistration />
-    	</div>
+    	
+    	<UserRegistration />
     );
   }
 }
