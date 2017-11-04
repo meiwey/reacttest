@@ -1,4 +1,5 @@
-import React from 'react';
+import React ,{PropTypes} from 'react';
+import Dummy from './Dummy';
 
 class UserRegistration extends React.Component {
 
@@ -27,6 +28,7 @@ class UserRegistration extends React.Component {
     	};
     	
     	this.handleInputChange = this.handleInputChange.bind(this);
+    	this.handleSubmit = this.handleSubmit.bind(this);
   	}
   	
 	validateField(fieldName, value) {
@@ -95,19 +97,27 @@ class UserRegistration extends React.Component {
 			{[name] : value},
 			()=> {this.validateField(name,value)
 		});
-		
-		
 	}
 	
-	onSubmitReg(event)
-	{
+	handleSubmit(event){
+		 event.preventDefault();
+		 
+		var dummyS = new Dummy;
+		if(dummyS.registerUser(this.state.name, this.state.email,this.state.username, this.state.password))
+		 {
+		 	this.props.history.push('/login')
+		 }		 
+		 else
+		 {console.log('reg failed')}	
+		 
+
 	}
 	
 	
 	render () {
 		return (
 			<div>
-			<form onSubmit={this.onSubmitReg}>
+			<form onSubmit={this.handleSubmit}>
 				<h1> Hello ! </h1>
 				<fieldset className='form-group'>
 				<label> Name : </label>
@@ -146,5 +156,6 @@ class UserRegistration extends React.Component {
 		)
 	}
 }
+
 
 export default UserRegistration;

@@ -1,4 +1,6 @@
 import React from 'react';
+import Auth from './Auth';
+import Dummy from './Dummy';
 
 class LoginForm extends React.Component {
 
@@ -14,9 +16,12 @@ class LoginForm extends React.Component {
     		passwordEdit:false,
     		usernameEdit:false,
     		
+    		errorMsg :false
+    		
     	};
     	
     	this.handleInputChange = this.handleInputChange.bind(this);
+    	this.handleSubmit = this.handleSubmit.bind(this);
   	}
   	
 	validateField(fieldName, value) {
@@ -60,22 +65,36 @@ class LoginForm extends React.Component {
 		this.setState(
 			{[name] : value},
 			()=> {this.validateField(name,value)
-		});
-		
-		
+		});		
 	}
 	
-	onLogin(event)
+	handleSubmit(event)
 	{
+		event.preventDefault();
+		
+		console.log(this.state.username);
+		var dummyS = new Dummy();
+		var auth = new Auth();
+
+		if(dummyS.checkUser(this.state.username, this.state.password))
+		{
+			auth.authenticateUser(this.state.username)
+			this.props.history.push('/userList')
+		}
+		else
+		{	
+			this.errorMsg = true
+			console.log(dummyS.users)
+		}
 	}
 
 	
 	render () {
 		return (
 			<div>
-			<form>
+			<form onSubmit={this.handleSubmit}>
 				<h1> Login </h1>
-				
+				<label className='errorMsg' style={{visibility: (this.state.errorMsg) ? 'visible' : 'hidden' }}>Invalid User! Please check your username and password!</label>
 				<fieldset className='form-group'>
 				<label> Username : </label>
 				<input className='forminput' name="username" type="text" value={this.state.username} onChange={this.handleInputChange}  />
