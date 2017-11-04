@@ -67,38 +67,6 @@ class LoginForm extends React.Component {
 	
 	onLogin(event)
 	{
-		event.preventDefault();
-
-   	 	// create a string for an HTTP body message
-    	const username = encodeURIComponent(this.state.user.username);
-    	const password = encodeURIComponent(this.state.user.password);
-    	const formData = `username=${username}&password=${password}`;
-
-    	// create an AJAX request
-    	const xhr = new XMLHttpRequest();
-    	xhr.open('post', '/auth/signup');
-    	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    	xhr.responseType = 'json';
-    	xhr.addEventListener('load', () => {
-      
-      	if (xhr.status === 200) {
-        	//success
-        	this.setState({ errors: {}});
-
-        	console.log('The form is valid');
-      	} 
-      	else {
-        // failure
-
-        const errors = xhr.response.errors ? xhr.response.errors : {};
-        	errors.summary = xhr.response.message;
-
-        		this.setState({
-          			errors
-        		});
-      		}
-    	});
-    	xhr.send(formData);
 	}
 
 	
@@ -110,13 +78,13 @@ class LoginForm extends React.Component {
 				
 				<fieldset className='form-group'>
 				<label> Username : </label>
-				<input name="username" type="text" value={this.state.username} onChange={this.handleInputChange}  />
+				<input className='forminput' name="username" type="text" value={this.state.username} onChange={this.handleInputChange}  />
 				<label className='errorMsg' style={{visibility: (!this.state.usernameValid && this.state.usernameEdit) ? 'visible' : 'hidden' }}>Username need to have more than 5 characters!</label>
 				</fieldset>
 				
 				<fieldset className='form-group'>
 				<label> Password : </label>
-				<input name="password" type="password" value={this.state.password} onChange={this.handleInputChange}/>
+				<input className='forminput'  name="password" type="password" value={this.state.password} onChange={this.handleInputChange}/>
 				<label className='errorMsg' style={{visibility: (!this.state.passwordValid && this.state.passwordEdit) ? 'visible' : 'hidden' }}>Password needs to be longer than 6 characters!</label>			
 				</fieldset>
 				
