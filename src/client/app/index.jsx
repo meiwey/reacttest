@@ -12,6 +12,7 @@ import Auth from './Auth'
 const Main = () => (
   <main>
     <Switch>
+      <Route path='/' component={LoginForm}/>
       <Route path='/register' component={UserRegistration}/>
       <Route path='/logout' component={Logout}/>
       <Route path='/login' component={LoginForm}/>
