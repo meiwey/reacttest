@@ -1,5 +1,6 @@
 class Auth {
 
+
 authenticateUser(username) {
   	localStorage.setItem('user', username);
     localStorage.setItem('isUserAuthenticated', true);

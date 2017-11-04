@@ -1,5 +1,6 @@
 import React ,{PropTypes} from 'react';
 import Dummy from './Dummy';
+import LogoutHeader from './LogoutHeader.jsx';
 
 class UserRegistration extends React.Component {
 
@@ -100,11 +101,11 @@ class UserRegistration extends React.Component {
 	}
 	
 	handleSubmit(event){
-		 event.preventDefault();
 		 
 		var dummyS = new Dummy;
 		if(dummyS.registerUser(this.state.name, this.state.email,this.state.username, this.state.password))
 		 {
+		 	alert('Your registration is completed! Please proceed to login!')
 		 	this.props.history.push('/login')
 		 }		 
 		 else
@@ -116,6 +117,8 @@ class UserRegistration extends React.Component {
 	
 	render () {
 		return (
+		<div>
+		<LogoutHeader />
 			<div>
 			<form onSubmit={this.handleSubmit}>
 				<h1> Hello ! </h1>
@@ -153,6 +156,7 @@ class UserRegistration extends React.Component {
 				</fieldset>
 			</form>
 			</div>
+		</div>
 		)
 	}
 }

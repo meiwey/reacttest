@@ -14,7 +14,6 @@ class Dummy{
   	}
   
   	retrieveUsers() {
-  		console.log("retrieve");
   		var temp =localStorage.getItem('userList');
   		if (temp!=null)
   			this.users = JSON.parse(localStorage.getItem('userList'));

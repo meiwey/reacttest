@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from './Auth';
 import Dummy from './Dummy';
+import LogoutHeader from './LogoutHeader.jsx';
 
 class LoginForm extends React.Component {
 
@@ -72,7 +73,6 @@ class LoginForm extends React.Component {
 	{
 		event.preventDefault();
 		
-		console.log(this.state.username);
 		var dummyS = new Dummy();
 		var auth = new Auth();
 
@@ -83,18 +83,22 @@ class LoginForm extends React.Component {
 		}
 		else
 		{	
-			this.errorMsg = true
-			console.log(dummyS.users)
+			this.state.errorMsg = true
+			this.setState(
+			{[this.state.errorMsg] : true})
 		}
 	}
 
 	
 	render () {
 		return (
+		<div>
+			<LogoutHeader />
 			<div>
 			<form onSubmit={this.handleSubmit}>
 				<h1> Login </h1>
-				<label className='errorMsg' style={{visibility: (this.state.errorMsg) ? 'visible' : 'hidden' }}>Invalid User! Please check your username and password!</label>
+				<label className='errorGeneralMsg' style={{visibility: (this.state.errorMsg) ? 'visible' : 'hidden' }}>Invalid User! Please check your username and password!</label>
+				
 				<fieldset className='form-group'>
 				<label> Username : </label>
 				<input className='forminput' name="username" type="text" value={this.state.username} onChange={this.handleInputChange}  />
@@ -112,6 +116,7 @@ class LoginForm extends React.Component {
 				</fieldset>
 			</form>
 			</div>
+		</div>
 		)
 	}
 }
